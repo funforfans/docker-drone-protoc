@@ -1,0 +1,8 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: protoc
+    image: /protoc
+    commands:
+      - sh protoc_api.sh
