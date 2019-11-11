@@ -31,7 +31,7 @@ services:
       - 8000:80
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./data/drone/:/var/lib/drone
+      - drone-data:/var/lib/drone/:rw
     environment:
       - DRONE_OPEN=true
       - DRONE_SERVER_HOST=172.16.4.94:8000
@@ -63,3 +63,11 @@ services:
       - DRONE_DEBUG=true
       - TZ=Asia/Shanghai
     restart: always
+
+  docker-bind:
+    image: docker:dind
+    privileged: true
+    command: --storage-driver=overlay
+
+volumes:
+  drone-data:
